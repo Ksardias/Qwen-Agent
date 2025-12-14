@@ -198,7 +198,7 @@ def validate_tools_config(tools: List[Union[str, Dict, BaseTool]]) -> List[str]:
         if isinstance(tool, str):
             tool_name = tool
         elif isinstance(tool, dict):
-            if isinstance(tool, dict) and 'mcpServers' in tool:
+            if 'mcpServers' in tool:
                 # MCP configuration - might be local or external
                 issues.append(
                     "ℹ️  MCP (Model Context Protocol) servers detected. "
@@ -297,8 +297,9 @@ def run_privacy_check(
     
     if verbose:
         if not issues:
-            logger.info("✅ Privacy check passed - configuration appears to be local-only")
-            print("✅ Privacy check passed - configuration appears to be local-only")
+            msg = "✅ Privacy check passed - configuration appears to be local-only"
+            logger.info(msg)
+            print(msg)
             print("\nConfiguration summary:")
             if llm_cfg:
                 model_type = llm_cfg.get('model_type', 'oai')
@@ -322,8 +323,9 @@ def run_privacy_check(
                     print(f"  • Tools: {', '.join(tool_names)}")
             return True
         else:
-            logger.warning(f"⚠️  Privacy check found {len(issues)} issue(s)")
-            print(f"\n⚠️  Privacy check found {len(issues)} issue(s):\n")
+            msg = f"⚠️  Privacy check found {len(issues)} issue(s)"
+            logger.warning(msg)
+            print(f"\n{msg}:\n")
             for i, issue in enumerate(issues, 1):
                 print(f"{i}. {issue}\n")
             

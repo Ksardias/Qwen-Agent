@@ -38,7 +38,7 @@ def test_is_local_url():
     assert is_local_url('http://172.16.0.1:8000')
     assert is_local_url('')
     assert is_local_url(None)
-    
+
     # External URLs
     assert not is_local_url('https://api.openai.com')
     assert not is_local_url('https://dashscope.aliyuncs.com')

@@ -36,6 +36,8 @@ For Ollama setup:
 
 import os
 import sys
+import traceback
+import argparse
 from qwen_agent.agents import Assistant
 from qwen_agent.utils.privacy_check import (
     run_privacy_check,
@@ -173,7 +175,6 @@ def interactive_chat(bot):
             break
         except Exception as e:
             print(f"\n❌ Error: {e}")
-            import traceback
             traceback.print_exc()
 
 
@@ -218,7 +219,6 @@ def demo_local_assistant():
         
     except Exception as e:
         print(f"\n❌ Error setting up agent: {e}")
-        import traceback
         traceback.print_exc()
         print("\nPlease ensure your local LLM server is running.")
         print("See the setup command printed above for instructions.")
@@ -285,8 +285,6 @@ def example_programmatic_usage():
 
 
 if __name__ == '__main__':
-    import argparse
-    
     parser = argparse.ArgumentParser(
         description='Privacy-focused local-only Qwen-Agent example',
         formatter_class=argparse.RawDescriptionHelpFormatter,
