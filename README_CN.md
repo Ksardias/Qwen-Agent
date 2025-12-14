@@ -274,6 +274,30 @@ llm_cfg = {
 
 BrowserQwen 是一款基于 Qwen-Agent 构建的浏览器助手。如需了解详情，请参阅其[文档](browser_qwen_cn.md)。
 
+# 隐私与安全
+
+## 本地LLM配置以保护隐私
+
+如果您需要确保**数据不会发送到外部服务器**，请参阅我们的详细指南：[LOCAL_LLM_PRIVACY.md](LOCAL_LLM_PRIVACY.md)（英文文档）
+
+该指南涵盖：
+- 如何配置 Qwen-Agent 实现完全本地化运行
+- 哪些工具会调用外部 API
+- 配置验证工具
+- 隐私保护配置的完整示例
+
+快速验证您的配置：
+```python
+from qwen_agent.utils.privacy_check import run_privacy_check
+
+# 验证您的配置是否符合隐私要求
+llm_cfg = {'model': 'Qwen2.5-7B', 'model_server': 'http://localhost:8000/v1'}
+tools = ['code_interpreter']  # 仅使用本地工具
+run_privacy_check(llm_cfg, tools, strict=True)
+```
+
+另请参阅：[examples/assistant_local_only.py](examples/assistant_local_only.py) 完整的示例代码。
+
 # 免责声明
 
 代码解释器未进行沙盒隔离，会在部署环境中执行代码。请避免向Qwen发出危险指令，切勿将该代码解释器直接用于生产目的。
