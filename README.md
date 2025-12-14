@@ -279,6 +279,30 @@ We have released [a fast RAG solution](https://github.com/QwenLM/Qwen-Agent/blob
 
 BrowserQwen is a browser assistant built upon Qwen-Agent. Please refer to its [documentation](https://github.com/QwenLM/Qwen-Agent/blob/main/browser_qwen.md) for details.
 
+# Privacy & Security
+
+## Local LLM Configuration for Privacy
+
+If you need to ensure that **no data is sent to external servers**, please refer to our comprehensive guide: [LOCAL_LLM_PRIVACY.md](LOCAL_LLM_PRIVACY.md)
+
+This guide covers:
+- How to configure Qwen-Agent for completely local operation
+- Which tools make external API calls
+- Configuration validation utilities
+- Complete examples of privacy-focused setups
+
+Quick validation of your configuration:
+```python
+from qwen_agent.utils.privacy_check import run_privacy_check
+
+# Validate your configuration for privacy
+llm_cfg = {'model': 'Qwen2.5-7B', 'model_server': 'http://localhost:8000/v1'}
+tools = ['code_interpreter']  # Local tools only
+run_privacy_check(llm_cfg, tools, strict=True)
+```
+
+See also: [examples/assistant_local_only.py](examples/assistant_local_only.py) for a complete working example.
+
 # Disclaimer
 
 The code interpreter is not sandboxed, and it executes code in your own environment. Please do not ask Qwen to perform dangerous tasks, and do not directly use the code interpreter for production purposes.
